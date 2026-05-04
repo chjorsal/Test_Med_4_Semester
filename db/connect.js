@@ -12,9 +12,9 @@ const env = {
 };
 
 export async function connect() {
-  const client = new pg.Client(env);
-  await client.connect();
-  return client;
+  const db = new pg.Client(env);
+  await db.connect();
+  return db;
 }
 
 export function pool() {

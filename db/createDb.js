@@ -1,4 +1,5 @@
 import { connect } from "./connect.js";
+import upload from "pg-upload";
 
 const db = await connect();
 const timestamp = (await db.query("select now() as timestamp")).rows[0][
@@ -57,6 +58,36 @@ await db.query(`
         track_id integer references tracks
     )
 `);
+console.log("Importing csv-data into tables...");
+
+await upload(
+  db,
+  "db/genre.csv",
+  `
+    copy  genre (genre_id, genre)
+    from  stdin
+    with  csv header encoding 'UTF-8'
+`,
+);
+
+await upload(
+  db,
+  "db/artist.csv",
+  `
+    copy  artist (artist_id,artist)
+    from  stdin
+    with  csv header encoding 'UTF-8'
+`,
+);
+await upload(
+  db,
+  "db/tracks.csv",
+  `
+    copy  tracks (track_id,songname,artist_id,genre_id)
+    from  stdin
+    with  csv header encoding 'UTF-8'
+`,
+);
 
 await db.end();
 console.log("Database successfully recreated. KOM NUUUUU!!!!");
