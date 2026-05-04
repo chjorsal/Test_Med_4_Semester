@@ -35,3 +35,37 @@
   border: none;
   cursor: pointer;
 }
+
+.song-container {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  grid-auto-rows: 80px;
+  gap: 10px;
+  width: 800px;
+}
+
+.song-title {
+  color: #000;
+}
+
+.song-artist {
+  color: grey;
+}
+
+.song-info,
+.vote-box {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.vote-box {
+  justify-content: center;
+  flex-direction: column;
+}
+
+.song-info {
+  display: table-column;
+}
