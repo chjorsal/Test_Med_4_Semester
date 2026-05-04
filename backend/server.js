@@ -11,3 +11,4 @@ server.listen(port, onLoadLogPort);
 function onLoadLogPort() {
   console.log("Server er loadet med port", port);
 }
+
