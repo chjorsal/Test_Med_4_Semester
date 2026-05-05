@@ -9,35 +9,38 @@
   <body>
     <div class="page">
       <div class="leftside">
-        <div class="now-playing">now playing</div>
-        <div class="qr-kode">qr kode</div>
+        <div class="now-playing">
+          <div class="now-playing-top"><span>Now playing</span></div>
+          <div class="now-playing-mid">Pokerface - Lady Gaga</div>
+          <div class="now-playing-bottom">------...------</div>
+        </div>
+
+        <div class="qr-kode">
+          <div class="qr-kode-left">billede</div>
+
+          <div class="qr-kode-right">
+            <div class="join-code"><span>JOIN CODE</span></div>
+            <div class="join-code-tekst"><span>3Jh%gj</span></div>
+          </div>
+        </div>
       </div>
       <!--Lukke div til leftside-->
 
       <div class="rightside">
         <div class="songlist">
           <div class="next-track">
-            Next track:
-            <div class="song-info">
-              <div class="song-title">Beat It</div>
-              <div class="song-artist">Michael Jackson</div>
-            </div>
+            <span>Next track:</span>
 
-            <div class="vote-box">
-              <button onclick="vote(this)">Stem</button>
-              <span>0</span>
-            </div>
-          </div>
+            <div class="next-track-song-row">
+              <div class="song-info-next-track">
+                <div class="song-title">Beat It</div>
+                <div class="song-artist">Michael Jackson</div>
+              </div>
 
-          <div class="song-row">
-            <div class="song-info">
-              <div class="song-title">Beat It</div>
-              <div class="song-artist">Michael Jackson</div>
-            </div>
-
-            <div class="vote-box">
-              <button onclick="vote(this)">Stem</button>
-              <span>0</span>
+              <div class="vote-box-next-track">
+                <button onclick="vote(this)">Stem</button>
+                <p>0</p>
+              </div>
             </div>
           </div>
 
@@ -72,6 +75,18 @@
             </div>
 
             <div class="vote-box">
+              <button onclick="vote(this)">Stem</button>
+              <span>0</span>
+            </div>
+          </div>
+
+          <div class="song-row kick-song">
+            <div class="song-info">
+              <div class="song-title">Beat It</div>
+              <div class="song-artist">Michael Jackson</div>
+            </div>
+
+            <div class="vote-box kick-vote-box">
               <button onclick="vote(this)">Stem</button>
               <span>0</span>
             </div>
