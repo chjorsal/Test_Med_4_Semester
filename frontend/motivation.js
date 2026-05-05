@@ -1,25 +1,50 @@
 const element = document.getElementById("content");
+const elements = document.querySelectorAll(".song-title");
 
 const params = new URLSearchParams(window.location.search);
 const sessionId = params.get("id");
 
-await loadAndRenderSuggestions(sessionId, element);
+let suggestions = [];
+
+init();
+
+async function init() {
+  await loadAndRenderSuggestions(sessionId, element);
+  await forEachRender();
+}
+
+async function forEachRender() {
+  elements.forEach((currentElement, index) => {
+    if (suggestions[index]) {
+      currentElement.textContent = suggestions[index].songname;
+    }
+  });
+}
 
 async function loadAndRenderSuggestions(sessionId, element) {
-  const response = await fetch(`/api/suggestions/${sessionId}`);
-  if (response.ok) {
-    const suggestions = await response.json();
+  try {
+    const response = await fetch(`/api/suggestions/${sessionId}`);
+
+    if (!response.ok) {
+      element.textContent = "Could not get suggestions, try again later";
+      return;
+    }
+
+    suggestions = await response.json();
     console.log(suggestions);
-    const tracksElement = document.createElement("div");
-    renderTrack(suggestions, tracksElement);
-    element.appendChild(tracksElement);
-  } else {
-    element.textContent = "Could not get suggestions, try again later";
+
+    /*const container = document.createElement("div");
+    renderTrack(suggestions, container);
+    element.appendChild(container); */
+  } catch (error) {
+    console.error(error);
+    element.textContent = "Something went wrong";
   }
 }
 
 function renderTrack(suggestions, element) {
-  const tracksElement = document.createElement("h1");
-  tracksElement.textContent = ` ${suggestions[0].songname}`;
-  element.appendChild(tracksElement);
+  if (!suggestions.length) return;
+  const track = document.createElement("h1");
+  track.textContent = suggestions[0].songname;
+  element.appendChild(track);
 }
