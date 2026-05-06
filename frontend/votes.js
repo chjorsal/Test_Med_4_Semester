@@ -15,7 +15,7 @@ async function loadVotes() {
 }
 
 async function vote(btn) {
-  if (btn.disabled) {
+  if (btn.disabled) { //
     return;
   }
 
