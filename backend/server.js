@@ -69,7 +69,7 @@ async function onRandomSuggestion(request, respones) {
   from tracks t
   join artist a 
     on t.artist_id = a.artist_id
-    where t.genre_id = 2
+    where t.genre_id IN (1, 2, 3)
   order by random()
   limit 5;
 `);
