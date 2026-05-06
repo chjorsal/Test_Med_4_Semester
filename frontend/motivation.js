@@ -1,25 +1,16 @@
-const element = document.getElementById("content");
+const element = [];
 const elements = document.querySelectorAll(".song-title");
+const Artistelements = document.querySelectorAll(".song-artist");
 
 const params = new URLSearchParams(window.location.search);
 const sessionId = params.get("id");
 
 let suggestions = [];
 
-init();
+await loadAndRenderSuggestions(sessionId, element);
+await forEachRenderTracks();
 
-async function init() {
-  await loadAndRenderSuggestions(sessionId, element);
-  await forEachRender();
-}
-
-async function forEachRender() {
-  elements.forEach((currentElement, index) => {
-    if (suggestions[index]) {
-      currentElement.textContent = suggestions[index].songname;
-    }
-  });
-}
+await forEachRenderArtist();
 
 async function loadAndRenderSuggestions(sessionId, element) {
   try {
@@ -32,19 +23,24 @@ async function loadAndRenderSuggestions(sessionId, element) {
 
     suggestions = await response.json();
     console.log(suggestions);
-
-    /*const container = document.createElement("div");
-    renderTrack(suggestions, container);
-    element.appendChild(container); */
   } catch (error) {
     console.error(error);
     element.textContent = "Something went wrong";
   }
 }
 
-function renderTrack(suggestions, element) {
-  if (!suggestions.length) return;
-  const track = document.createElement("h1");
-  track.textContent = suggestions[0].songname;
-  element.appendChild(track);
+async function forEachRenderTracks() {
+  elements.forEach((currentElement, index) => {
+    if (suggestions[index]) {
+      currentElement.textContent = suggestions[index].songname;
+    }
+  });
+}
+
+async function forEachRenderArtist() {
+  Artistelements.forEach((currentElement, index) => {
+    if (suggestions[index]) {
+      currentElement.textContent = suggestions[index].artist;
+    }
+  });
 }

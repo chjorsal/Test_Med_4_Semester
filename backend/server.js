@@ -13,11 +13,17 @@ server.listen(port, onLoadLogPort);
 
 async function onRandomSuggestion(request, respones) {
   const dbResult = await db.query(`
-    select * 
-    from tracks 
-    where genre_id = 2
-    order by random() 
-    limit 5; 
+
+  select t.songname, a.artist
+  from tracks t
+
+  join artist a 
+    on t.artist_id = a.artist_id
+  
+  
+    where t.genre_id = 2
+  order by random()
+  limit 5;
 `);
   respones.json(dbResult.rows);
 }
