@@ -19,22 +19,23 @@ async function onGetVotes(request, response) {
     artist.artist,
     COUNT(votes.track_id) AS votes
     FROM tracks
-    LEFT JOIN votes ON tracks.track_id = votes.track_id
+    LEFT JOIN votes ON tracks.track_id = votes.track_id -- LEFT Join sørger for at alle tracks kommer med også dem med 0 votes
     LEFT JOIN artist ON tracks.artist_id = artist.artist_id
     GROUP BY tracks.track_id, tracks.songname, artist.artist
+    ORDER BY votes DESC
   `);
   response.json(dbResult.rows);
 }
 
 async function onPostVote(request, response) {
-  try { // vi bruger en tru chach til at tjekke at en person kun kan stemme på en sang en gang
+  try { // vi laver en query der tjekker om brugeren allerede har stemt i denne session
     const trackId = request.body.track_id;
     const sessionId = request.body.session_id;
     const userId = request.body.user_id;
 
     const existingVote = await db.query( // denne const er lavet så vi kigger vores query igennem om en user har stemt
-      `SELECT * FROM votes WHERE user_id = $1 AND track_id = $2`,
-      [userId, trackId]// når det ikke længere er hard coded skal dette laves om
+      `SELECT * FROM votes WHERE user_id = $1 AND session_id = $2`,
+      [userId, sessionId]// når det ikke længere er hard coded skal dette laves om
     );
 
     if (existingVote.rows.length > 0) { // hvis en bruger har stemt kommer de til at få denne fejl
@@ -50,6 +51,7 @@ async function onPostVote(request, response) {
     );
 
     response.json({ success: true });
+    
   } catch (error) {
     console.error("Vote error:", error.message);
     response.status(500).json({ error: error.message });

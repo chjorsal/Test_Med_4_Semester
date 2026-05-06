@@ -4,7 +4,7 @@ async function loadVotes() {
 
   votes.forEach(function (song) {
     const btn = document.querySelector(
-      'button[data-track-id="' + song.track_id + '"]'
+      'button[data-track-id="' + song.track_id + '"]' // id er de forskellige knapper
     );
 
     if (btn) {
@@ -26,7 +26,8 @@ async function vote(btn) {
     headers: {
     "Content-Type": "application/json"
   },
-    body : JSON.stringify ({track_id: track_Id, user_id: 1, session_id: 1})  
+    body : JSON.stringify ({track_id: track_Id, user_id: 1, session_id: 1})  // de skal laves om senere så de ikke er fixed
+    // de skal astates af currentSessionId eller ligende
   });
 
  if (!response.ok) { // hvis dette reponse ikke er ok så slå den knappen fra stem og i stedet 
