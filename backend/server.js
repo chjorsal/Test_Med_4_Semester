@@ -10,6 +10,9 @@ server.use(express.static("frontend"));
 server.get("/api/votes", onGetVotes);
 server.post("/api/votes", onPostVote);
 server.listen(port, onLoadLogPort);
+server.get("/api/suggestions/:sessionId", onRandomSuggestion);
+
+server.listen(port, onLoadLogPort);
 
 async function onGetVotes(request, response) {
   const dbResult = await db.query(`
@@ -28,48 +31,44 @@ async function onGetVotes(request, response) {
 }
 
 async function onPostVote(request, response) {
-  try { // vi laver en query der tjekker om brugeren allerede har stemt i denne session
+  try {
+    // vi laver en query der tjekker om brugeren allerede har stemt i denne session
     const trackId = request.body.track_id;
     const sessionId = request.body.session_id;
     const userId = request.body.user_id;
 
-    const existingVote = await db.query( // denne const er lavet så vi kigger vores query igennem om en user har stemt
+    const existingVote = await db.query(
+      // denne const er lavet så vi kigger vores query igennem om en user har stemt
       `SELECT * FROM votes WHERE user_id = $1 AND session_id = $2`,
-      [userId, sessionId]// når det ikke længere er hard coded skal dette laves om
+      [userId, sessionId], // når det ikke længere er hard coded skal dette laves om
     );
 
-    if (existingVote.rows.length > 0) { // hvis en bruger har stemt kommer de til at få denne fejl
+    if (existingVote.rows.length > 0) {
+      // hvis en bruger har stemt kommer de til at få denne fejl
       return response.status(400).json({
-        error: "User already voted"
+        error: "User already voted",
       });
     }
 
     await db.query(
       `INSERT INTO votes (session_id, user_id, track_id)
        VALUES ($1, $2, $3)`,
-      [sessionId, userId, trackId] // når det ikke længere er hard coded skal dette laves om
+      [sessionId, userId, trackId], // når det ikke længere er hard coded skal dette laves om
     );
 
     response.json({ success: true });
-    
   } catch (error) {
     console.error("Vote error:", error.message);
     response.status(500).json({ error: error.message });
   }
-server.get("/api/suggestions/:sessionId", onRandomSuggestion);
-
-server.listen(port, onLoadLogPort);
-
+}
 async function onRandomSuggestion(request, respones) {
   const dbResult = await db.query(`
 
   select t.songname, a.artist
   from tracks t
-
   join artist a 
     on t.artist_id = a.artist_id
-  
-  
     where t.genre_id = 2
   order by random()
   limit 5;
