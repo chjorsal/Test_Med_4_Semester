@@ -12,7 +12,7 @@
         <div class="now-playing">
           <div class="now-playing-top"><span>Now playing</span></div>
           <div class="now-playing-mid">Pokerface - Lady Gaga</div>
-          <div class="now-playing-bottom">------...------</div>
+          <div class="now-playing-bottom">Artist</div>
         </div>
 
         <div class="qr-kode">
@@ -98,6 +98,35 @@
     </div>
     <!--Lukke div til page-->
 
+    <style>
+#progress-container {
+  width: 100%;
+  background-color: #ddd;
+  height: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #4CAF50;
+  animation: fillBar 30s linear forwards;
+}
+
+@keyframes fillBar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-container">
+  <div id="progress-bar"></div>
+</div>
+
+</body>
     <div>
       <a href="mood.html">
         <button id="buttomFrontPage" class="btn">Mood</button>
