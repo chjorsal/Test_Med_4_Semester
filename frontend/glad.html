@@ -3,78 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Glad</title>
-    <link rel="stylesheet" href="stylesheet.css" />
-  </head>
-  <body>
-    <div>
-      <a href="mood.html">
-        <button id="buttomFrontPage" class="btn">Mood</button>
-      </a>
-    </div>
-  </body>
-</html>
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fest</title>
     <link rel="stylesheet" href="stylesheet.css" />
   </head>
   <body>
+
     <div class="songlist">
       
       <div class="current-song">currently playing</div>
 
-     <div class="song-container">
-        <div class="song-info">
-          <div class="song-title">Beat It</div>
-          <div class="song-artist">Michael Jackson</div>
-        </div>
-
-        <div class="vote-box">
-          <button onclick="vote(this)" data-song-id="1">Stem</button>
-          <span>0</span>
-        </div>
-      </div>
-
       <div class="song-container">
         <div class="song-info">
-          <div class="song-title">Beat It</div>
-          <div class="song-artist">Michael Jackson</div>
-        </div>
-        
-
-        <div class="vote-box">
-          <button onclick="vote(this)">Stem</button>
-          <span>0</span>
-        </div>
-      </div>
-
-      
-      <div class="song-container">
-        <div class="song-info">
-          <div class="song-title">Beat It</div>
-          <div class="song-artist">Michael Jackson</div>
+          <div class="song-title">Shake It Off</div>
+          <div class="song-artist">Taylor Swift</div>
         </div>
 
         <div class="vote-box">
-          <button onclick="vote(this)">Stem</button>
-          <span>0</span>
-        </div>
-      </div>
-
-
-      
-      <div class="song-container">
-        <div class="song-info">
-          <div class="song-title">Beat It</div>
-          <div class="song-artist">Michael Jackson</div>
-        </div>
-
-        <div class="vote-box">
-          <button onclick="vote(this)">Stem</button>
+          <button onclick="vote(this)" data-track-id="1">Stem</button> 
           <span>0</span>
         </div>
       </div>
@@ -86,15 +31,55 @@
         </div>
 
         <div class="vote-box">
-          <button onclick="vote(this)">Stem</button>
+          <button onclick="vote(this)" data-track-id="2">Stem</button>
           <span>0</span>
         </div>
       </div>
+
+      <div class="song-container">
+        <div class="song-info">
+          <div class="song-title">Beat It</div>
+          <div class="song-artist">Michael Jackson</div>
+        </div>
+
+        <div class="vote-box">
+          <button onclick="vote(this)" data-track-id="3">Stem</button>
+          <span>0</span>
+        </div>
+      </div>
+
+      <div class="song-container">
+        <div class="song-info">
+          <div class="song-title">Beat It</div>
+          <div class="song-artist">Michael Jackson</div>
+        </div>
+
+        <div class="vote-box">
+          <button onclick="vote(this)" data-track-id="4">Stem</button>
+          <span>0</span>
+        </div>
+      </div>
+
+      <div class="song-container">
+        <div class="song-info">
+          <div class="song-title">Beat It</div>
+          <div class="song-artist">Michael Jackson</div>
+        </div>
+
+        <div class="vote-box">
+          <button onclick="vote(this)" data-track-id="5">Stem</button>
+          <span>0</span>
+        </div>
+      </div>
+
+    </div>
 
     <div>
       <a href="mood.html">
         <button id="buttomFrontPage" class="btn">Mood</button>
       </a>
     </div>
+
+    <script src="votes.js"></script>
   </body>
 </html>

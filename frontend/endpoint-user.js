@@ -71,39 +71,4 @@ function useEndpoint(method, url, requestBody) {
         updateLater(() => (button.disabled = false));
       });
   });
-
-  async function loadVotes() {
-    const response = await fetch("/api/votes");
-    const votes = await response.json();
-
-    console.log(votes);
-
-    votes.forEach(function (song) {
-      const btn = document.querySelector(
-        'button[data-song-id="' + song.track_id + '")',
-      );
-
-      if (btn) {
-        const countE1 = btn.nextElementSibling;
-        countE1.textContent = song.count;
-      }
-    });
-  }
-
-  async function vote(btn) {
-    if (btn.disabled) {
-      return;
-    }
-    const songId = btn.dataset.songId;
-
-    const response = await fetch("/api/vote/" + songId, {
-      method: "POST",
-    });
-    if (response.ok) {
-      const countEl = btn.nextElementSibling;
-      countEl.textContent = parseInt(countEl.textContent) + 1;
-      btn.disabled = true;
-      btn.textContent = "Gestemd";
-    }
-  }
 }
