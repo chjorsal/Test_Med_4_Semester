@@ -82,11 +82,6 @@
   color: greenyellow;
 }
 
-.now-playing-bottom {
-  display: flex;
-  color: blue;
-}
-
 .qr-kode {
   outline: 1px solid black;
   width: 100%;
