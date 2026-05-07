@@ -93,6 +93,7 @@
   height: 300px;
   display: flex;
   background-color: darkgray;
+  border-radius: 20px;
 }
 
 .qr-kode-left {
@@ -181,12 +182,20 @@
   color: greenyellow;
 }
 
-.song-row.kick-song {
-  background-color: red;
+.song-row.keep-song {
+  background-color: yellow;
 }
 
-.kick-vote-box {
+.keep-vote-box {
   color: #000;
+}
+
+.song-artist.keep-song-artist {
+  color: red;
+}
+
+.song-title.keep-song-title {
+  color: goldenrod;
 }
 
 .song-row {
@@ -203,12 +212,12 @@
 
 .song-title {
   color: white;
-  font-size: 18px;
+  font-size: 25px;
 }
 
 .song-artist {
   color: lightgray;
-  font-size: 18px;
+  font-size: 25px;
 }
 
 .song-info,
