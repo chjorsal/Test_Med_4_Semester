@@ -73,13 +73,19 @@
 .now-playing-top {
   margin-top: 10px;
   font-size: 30px;
-  color: lightgreen;
+  color: wheat;
 }
 
 .now-playing-mid {
   display: flex;
   font-size: 50px;
   color: greenyellow;
+}
+
+.now-playing-bottom {
+  display: flex;
+  color: lightgreen;
+  font-size: 40px;
 }
 
 .qr-kode {
