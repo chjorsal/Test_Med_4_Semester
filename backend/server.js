@@ -9,6 +9,7 @@ server.use(express.json());
 server.use(express.static("frontend"));
 server.get("/api/votes", onGetVotes);
 server.post("/api/votes", onPostVote);
+server.delete("/api/votes",onResetVote);
 server.listen(port, onLoadLogPort);
 server.get("/api/suggestions/:sessionId", onRandomSuggestion);
 
@@ -74,6 +75,19 @@ async function onRandomSuggestion(request, respones) {
   limit 5;
 `);
   respones.json(dbResult.rows);
+}
+
+// Denne funktion sletter alle stemmer i vores database 
+// Så det er muligt at stemme igen på en sang
+async function onResetVote(request, respones) {
+
+  try {
+    await db.query(`DELETE FROM votes`);
+    respones.json({ success: true });
+  } catch (error) {
+    console.error("Reset error:", error.message);
+    respones.status(500).json({ error: error.message });
+  }
 }
 
 function onLoadLogPort() {
